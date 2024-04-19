@@ -25,7 +25,7 @@ const Task: React.FC<TaskProps> = ({
     <C.Task key={data?.key}>
       {data.done ? (
         <C.TitleTask
-          style={{ textDecoration: "line-through", color: "#00ff00" }}
+          style={{ textDecoration: "line-through", color: "black" }}
         >
           {data.title ? data.title : "Nothing"}
         </C.TitleTask>

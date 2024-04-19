@@ -34,7 +34,7 @@ const Input = styled.input`
   background-color: #f3ffab;
   border: none;
   border-bottom: 1px dashed #a8b700;
-  color: #a8b700;
+  color: black;
   opacity: 0.5;
   font-family: Lobster, cursive;
 `;

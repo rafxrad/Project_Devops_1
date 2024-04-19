@@ -12,7 +12,7 @@ const Task = styled.li`
 `;
 
 const TitleTask = styled.div`
-  color: #a8b700;
+  color: black;
   width: 13vw;
   //background-color: pink;
   overflow: auto;
