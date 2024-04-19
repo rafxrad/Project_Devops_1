@@ -1,61 +1,50 @@
-import { openDb } from "../configDB.js";
-
-export const createTable = async () => {
-  openDb().then((db) => {
-    db.exec(
-      "CREATE TABLE IF NOT EXISTS Tasks (key INTEGER PRIMARY KEY, title TEXT, done NUMERIC)"
-    );
-  });
-};
-
+import {
+  CreateTask,
+  DeleteTask,
+  SelectTask,
+  ShowTask,
+  UpdateTasks,
+} from "../Services/taskService.js";
 export const insertTask = async (req, res) => {
-  let task = req.body;
-
-  openDb()
-    .then((db) => {
-      db.run("INSERT INTO Tasks (title,done) VALUES (?,?)", [
-        task.title,
-        task.done,
-      ]);
-    })
-    .then(res.json({ statusCode: 200 }));
-};
-
-export const updateTask = async (req, res) => {
-  let task = req.body;
-  if (task.key !== undefined) {
-    openDb()
-      .then((db) => {
-        db.run("UPDATE Tasks SET title=?, done=? WHERE key=?", [
-          task.title,
-          task.done,
-          task.key,
-        ]);
-      })
-      .then(res.json({ statusCode: 200 }));
+  let data = req.body;
+  if (!data.title) {
+    return res.json({ Error: "título não informado!" });
   }
+  const result = await CreateTask(data);
+  if (result) {
+    return res.status(201).json({ message: "Tarefa criada com sucesso!" });
+  }
+  return res.status(500).json({ Error: "Tarefa não foi criada!" });
 };
 
 export const showTasks = async (req, res) => {
-  return openDb().then((db) => {
-    return db.all("SELECT * FROM  Tasks").then((tasks) => res.json(tasks));
-  });
+  const tasks = await ShowTask();
+  return res.json(tasks);
 };
 
 export const showTask = async (req, res) => {
-  let key = await req.body.key;
-  return openDb().then((db) => {
-    return db
-      .get("SELECT * FROM  Tasks WHERE key=?", [key])
-      .then((task) => res.json(task));
-  });
+  let { key } = await req.body;
+  const result = await SelectTask(key);
+  if (result) {
+    return res.json(result);
+  }
+  return res.json({ error: "Tarefa não encontrada!" });
+};
+
+export const updateTask = async (req, res) => {
+  let { key, title, done } = await req.body;
+  const result = await UpdateTasks(key, { title, done });
+  if (result) {
+    return res.json({ message: "Tarefa editada com sucesso!" });
+  }
+  return res.json({ error: "Erro ao editar tarefa!" });
 };
 
 export const deleteTask = async (req, res) => {
-  let key = await req.body.key;
-  return openDb().then((db) => {
-    return db
-      .get("DELETE FROM Tasks WHERE key=?", [key])
-      .then((task) => res.json(task));
-  });
+  let { key } = await req.body;
+  const result = await DeleteTask(key);
+  if (result) {
+    return res.json({ message: "Tafera deletada com sucesso!" });
+  }
+  res.json({ error: "Erro ao deletar tarefa!" });
 };

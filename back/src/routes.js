@@ -1,15 +1,13 @@
 import { Router } from "express";
 import {
-  createTable,
   insertTask,
   showTasks,
-  updateTask,
-  showTask,
   deleteTask,
+  showTask,
+  updateTask,
 } from "./Controller/Task.js";
 
 const router = Router();
-createTable();
 router.post("/task", insertTask);
 router.get("/tasks", showTasks);
 router.put("/task", updateTask);
