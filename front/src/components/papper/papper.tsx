@@ -4,7 +4,6 @@ import Tape2 from "../decoration/tape2/tape2";
 import Task from "../Task/task";
 import { TaskType } from "../Task/tasktype";
 import { useState } from "react";
-import EditTask from "../EditTask/EditTask";
 type Props = {
   ListTasks: TaskType[];
   sendTask: (task: TaskType) => void;

@@ -69,7 +69,7 @@ function App() {
           sendUpdateTask={(data: TaskType) => {
             updateTask(data);
           }}
-          Data={selectTaskUpdate}
+          Data={selectTaskUpdate as TaskType}
           confirmCloseWindow={(confirm: boolean) => {
             setWindowUpdate(confirm);
           }}
