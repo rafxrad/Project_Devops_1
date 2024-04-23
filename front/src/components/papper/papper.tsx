@@ -23,7 +23,7 @@ const Papper: React.FC<Props> = ({
 
   const HandleSendTask = () => {
     if (inputTask.split(" ").join("") !== "") {
-      sendTask({ title: inputTask, done: 0 });
+      sendTask({ title: inputTask, done: false });
       setInputTask("");
     } else {
       setInputTask("");

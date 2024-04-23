@@ -1,7 +1,7 @@
 interface TaskType {
   key?: number;
   title: string;
-  done: number;
+  done: boolean;
 }
 
 export type { TaskType };

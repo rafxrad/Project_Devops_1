@@ -37,7 +37,7 @@ const Task: React.FC<TaskProps> = ({
         {data.done ? (
           <C.Button
             onClick={() => {
-              sendDoneTask({ key: data.key, title: data.title, done: 0 });
+              sendDoneTask({ key: data.key, title: data.title, done: false });
             }}
           >
             <img style={{ cursor: "pointer" }} src={DoneIcon}></img>
@@ -45,7 +45,7 @@ const Task: React.FC<TaskProps> = ({
         ) : (
           <C.Button
             onClick={() => {
-              sendDoneTask({ key: data.key, title: data.title, done: 1 });
+              sendDoneTask({ key: data.key, title: data.title, done: true });
             }}
             onMouseOver={() => renderA(true)}
             onMouseOut={() => renderA(false)}
