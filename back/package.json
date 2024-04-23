@@ -6,7 +6,7 @@
   "scripts": {
     "prisma:migrate:test": "dotenv -e .env.test -- prisma migrate deploy",
     "test": "dotenv -e .env.test -- jest --runInBand",
-    "start": "nodemon src/app.js"
+    "start": "nodemon ./index.js"
   },
   "author": "",
   "license": "MIT",

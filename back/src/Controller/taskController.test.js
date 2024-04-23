@@ -1,5 +1,5 @@
 const supertest = require("supertest");
-const { app, startServer } = require("../app");
+const { app, startServer } = require("./../../index");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 describe("Task Controller Tests", () => {
@@ -60,7 +60,7 @@ describe("Task Controller Tests", () => {
   it("should update a task", async () => {
     const response = await supertest(app)
       .put("/task")
-      .send({ key: 2, title: "Lavar o carro e aspirar", done: true });
+      .send({ key: 1, title: "Lavar o carro e aspirar", done: true });
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty(
