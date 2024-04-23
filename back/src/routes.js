@@ -1,18 +1,16 @@
-import { Router } from "express";
-import {
-  createTable,
+const { Router } = require("express");
+const {
   insertTask,
   showTasks,
-  updateTask,
-  showTask,
   deleteTask,
-} from "./Controller/Task.js";
+  showTask,
+  updateTask,
+} = require("./Controller/Task.js");
 
 const router = Router();
-createTable();
 router.post("/task", insertTask);
 router.get("/tasks", showTasks);
 router.put("/task", updateTask);
 router.post("/select/task", showTask);
 router.post("/delete/task", deleteTask);
-export default router;
+module.exports = router;

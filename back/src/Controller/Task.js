@@ -1,61 +1,59 @@
-import { openDb } from "../configDB.js";
+const {
+  CreateTask,
+  DeleteTask,
+  SelectTask,
+  ShowTask,
+  UpdateTasks,
+} = require("../Services/taskService.js");
 
-export const createTable = async () => {
-  openDb().then((db) => {
-    db.exec(
-      "CREATE TABLE IF NOT EXISTS Tasks (key INTEGER PRIMARY KEY, title TEXT, done NUMERIC)"
-    );
-  });
-};
-
-export const insertTask = async (req, res) => {
-  let task = req.body;
-
-  openDb()
-    .then((db) => {
-      db.run("INSERT INTO Tasks (title,done) VALUES (?,?)", [
-        task.title,
-        task.done,
-      ]);
-    })
-    .then(res.json({ statusCode: 200 }));
-};
-
-export const updateTask = async (req, res) => {
-  let task = req.body;
-  if (task.key !== undefined) {
-    openDb()
-      .then((db) => {
-        db.run("UPDATE Tasks SET title=?, done=? WHERE key=?", [
-          task.title,
-          task.done,
-          task.key,
-        ]);
-      })
-      .then(res.json({ statusCode: 200 }));
+async function insertTask(req, res) {
+  let data = req.body;
+  if (!data.title) {
+    return res.status(400).json({ Error: "título não informado!" });
   }
-};
+  const result = await CreateTask(data);
+  if (result) {
+    return res.status(201).json({ message: "Tarefa criada com sucesso!" });
+  }
+  return res.status(500).json({ Error: "Tarefa não foi criada!" });
+}
 
-export const showTasks = async (req, res) => {
-  return openDb().then((db) => {
-    return db.all("SELECT * FROM  Tasks").then((tasks) => res.json(tasks));
-  });
-};
+async function showTasks(req, res) {
+  const tasks = await ShowTask();
+  return res.json(tasks);
+}
 
-export const showTask = async (req, res) => {
-  let key = await req.body.key;
-  return openDb().then((db) => {
-    return db
-      .get("SELECT * FROM  Tasks WHERE key=?", [key])
-      .then((task) => res.json(task));
-  });
-};
+async function showTask(req, res) {
+  let { key } = req.body;
+  const result = await SelectTask(key);
+  if (result) {
+    return res.json(result);
+  }
+  return res.json({ error: "Tarefa não encontrada!" });
+}
 
-export const deleteTask = async (req, res) => {
-  let key = await req.body.key;
-  return openDb().then((db) => {
-    return db
-      .get("DELETE FROM Tasks WHERE key=?", [key])
-      .then((task) => res.json(task));
-  });
+async function updateTask(req, res) {
+  let { key, title, done } = req.body;
+  const result = await UpdateTasks(key, { title, done });
+  if (result) {
+    return res.json({ message: "Tarefa editada com sucesso!" });
+  }
+  return res.json({ error: "Erro ao editar tarefa!" });
+}
+
+async function deleteTask(req, res) {
+  let { key } = req.body;
+  const result = await DeleteTask(key);
+  if (result) {
+    return res.json({ message: "Tarefa deletada com sucesso!" });
+  }
+  return res.json({ error: "Erro ao deletar tarefa!" });
+}
+
+module.exports = {
+  insertTask,
+  showTasks,
+  showTask,
+  updateTask,
+  deleteTask,
 };
