@@ -1,5 +1,7 @@
 FROM node:20
 
+ENV DATABASE_URL mysql://root:todo92258823823@34.122.31.82:3306/todo
+
 WORKDIR /app
 
 COPY package*.json ./
