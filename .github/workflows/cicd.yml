@@ -25,7 +25,7 @@ jobs:
       - name: Pull front image from docker hub
         run: docker pull limanascimento/supertodolist:v1.1
       - name: Navigate to project directory
-        run: cd Project_Devops_1
+        run: cd ./ 
       - name: Install Docker Compose
         run: |
           sudo apt-get update
