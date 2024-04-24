@@ -24,12 +24,16 @@ jobs:
         run: docker pull eversonnascimento/back-todo:v1.0
       - name: Pull front image from docker hub
         run: docker pull limanascimento/supertodolist:v1.1
-      - name: Navigate to project directory
-        run: cd ./ 
-      - name: Install Docker Compose
+      - name: Check directory
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
-      - name: Run docker compose
-        run: docker-compose up -d
+          pwd
+          ls -la
+      # - name: Navigate to project directory
+      #   run: cd ./ 
+      # - name: Install Docker Compose
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y docker-compose
+      # - name: Run docker compose
+      #   run: docker-compose up -d
 
