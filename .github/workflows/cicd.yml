@@ -49,15 +49,14 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }} 
-
       - name: Navigate to project directory
-         run: cd /home/ubuntu/actions-runner/_work/Project_Devops_1/Project_Devops_1
-       - name: Install Docker Compose
-         run: |
-           sudo apt-get update
-           sudo apt-get install -y docker-compose
-       - name: Run docker compose
-         run: docker-compose up -d
+        run: cd /home/ubuntu/actions-runner/_work/Project_Devops_1/Project_Devops_1
+      - name: Install Docker Compose
+        run: |
+             sudo apt-get update
+             sudo apt-get install -y docker-compose
+      - name: Run docker compose
+        run: docker-compose up -d
         
 
 
