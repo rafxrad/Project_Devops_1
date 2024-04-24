@@ -15,22 +15,43 @@ jobs:
       
   deploy:
     needs: build
-    runs-on: aws-ec2
+    runs-on: ubuntu-latest
     steps:
-      - name: Pull back image from docker hub
-        run: docker pull eversonnascimento/back-todo:v1.0
-      - name: Pull front image from docker hub
-        run: docker pull limanascimento/supertodolist:v1.1
-      - name: Check directory
-        run: |
-            pwd
-            ls -la
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
-      - name: Run docker compose
-        run: docker-compose up -d
+      - name:  Build and push back Docker image
+        uses: docker/build-push-action@v3.2.0
+        with:
+          context: ./back
+          file: ./back/Dockerfile
+          push: true
+          tags: |
+              raf4costa/back-todo:v1.0
+              raf4costa/back-todo:latest
+      - name:  Build and push front Docker images
+        uses: docker/build-push-action@v3.2.0
+        with:
+          context: ./front
+          file: ./front/Dockerfile
+          push: true
+          tags: |
+            raf4costa/front-todo:v1.0
+            raf4costa/front-todo:latest
+
+    # runs-on: aws-ec2
+    # steps:
+    #   - name: Pull back image from docker hub
+    #     run: docker pull eversonnascimento/back-todo:v1.0
+    #   - name: Pull front image from docker hub
+    #     run: docker pull limanascimento/supertodolist:v1.1
+    #   - name: Check directory
+    #     run: |
+    #         pwd
+    #         ls -la
+    #   - name: Install Docker Compose
+    #     run: |
+    #       sudo apt-get update
+    #       sudo apt-get install -y docker-compose
+    #   - name: Run docker compose
+    #     run: docker-compose up -d
 
 
 ## commit again
