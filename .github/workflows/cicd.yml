@@ -32,22 +32,22 @@ jobs:
           push: true
           tags: raf4costa/front-todo:latest
 
-    # runs-on: aws-ec2
-    # steps:
-    #   - name: Pull back image from docker hub
-    #     run: docker pull eversonnascimento/back-todo:v1.0
-    #   - name: Pull front image from docker hub
-    #     run: docker pull limanascimento/supertodolist:v1.1
-    #   - name: Check directory
-    #     run: |
-    #         pwd
-    #         ls -la
-    #   - name: Install Docker Compose
-    #     run: |
-    #       sudo apt-get update
-    #       sudo apt-get install -y docker-compose
-    #   - name: Run docker compose
-    #     run: docker-compose up -d
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.AWS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: sa-east-1
 
 
-## commit again
+      
+
+
+
+      
