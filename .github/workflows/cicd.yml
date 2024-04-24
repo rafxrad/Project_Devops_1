@@ -25,8 +25,6 @@ jobs:
         run: |
             pwd
             ls -la
-      - name: Navigate to project directory
-        run: cd /home/ubuntu/_work/Project_Devops_1/Project_Devops_1
       - name: Install Docker Compose
         run: |
           sudo apt-get update
@@ -34,5 +32,5 @@ jobs:
       - name: Run docker compose
         run: docker-compose up -d
      
-     
+
 
