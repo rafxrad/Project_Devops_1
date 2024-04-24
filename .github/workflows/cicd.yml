@@ -12,11 +12,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      
-  deploy:
-    needs: build
-    runs-on: aws-ec2
-    steps:
       - name: enable runner
         run: |
           cd /home/ubuntu/actions-runner
@@ -24,6 +19,10 @@ jobs:
       - name: move to path
         run: |
           cd /home/ubuntu/actions-runner/_work/Project_Devops_1/Project_Devops_1
+      
+  deploy:
+    needs: build
+    runs-on: aws-ec2
       - name: Pull back image from docker hub
         run: docker pull eversonnascimento/back-todo:v1.0
       - name: Pull front image from docker hub
