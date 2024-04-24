@@ -1,0 +1,26 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout source
+        uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2
+    steps:
+      - name: Pull back image from docker hub
+        run: docker pull eversonnascimento/back-todo
+      - name: Pull front image from docker hub
+        run: docker pull nascimentolima/front-todo
+      - name: Run containers
+        run: docker run -it -p 3000:3000   -e DATABASE_URL="mysql://root:todo92258823823@34.122.31.82:3306/todo" back-todo
+        run: docker run -d -p 3000:5173 nascimentolima/front-todo
