@@ -29,11 +29,7 @@ jobs:
             pwd
             ls -la
       - name: Navigate to project directory
-        run: cd ./Project_Devops_1/docker-compose.yml 
-      - name: Check directory 2
-        run: |
-            pwd
-            ls -la
+        run: cd /home/ubuntu/_work/Project_Devops_1/Project_Devops_1
       - name: Install Docker Compose
         run: |
           sudo apt-get update
