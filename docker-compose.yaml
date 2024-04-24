@@ -3,7 +3,7 @@ services:
   backend:
     image: eversonnascimento/back-todo:v1.0
     ports:
-      - "3000:3000"
+      - "3000"
     environment:
       - DATABASE_URL=mysql://root:todo92258823823@34.122.31.82:3306/todo
     # Adicione as configurações adicionais do serviço back aqui
