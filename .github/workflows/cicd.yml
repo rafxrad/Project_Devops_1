@@ -49,6 +49,11 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }} 
+
+      - name: Run containers
+        name: SSH and Execute Commands
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@18.231.168.63 "echo 'Connected successfully'; docker pull raf4costa/back-todo:latest; docker run -d raf4costa/back-todo:latest; docker pull raf4costa/front-todo:latest; docker run -d raf4costa/front-todo:latest"
           
 
 
