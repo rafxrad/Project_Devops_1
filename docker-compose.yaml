@@ -17,5 +17,5 @@ services:
       - HOST=15.228.240.218
     # Adicione as configurações adicionais do serviço front aqui
 
-# Adicione outros serviços ou configurações adicionais do Docker Compose aqui
+# teste
 
