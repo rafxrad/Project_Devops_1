@@ -3,7 +3,7 @@ services:
   backend:
     image: eversonnascimento/back-todo:v1.0
     ports:
-      - 3000
+      - 15.228.240.218:3000
     environment:
       - DATABASE_URL=mysql://root:todo92258823823@34.122.31.82:3306/todo
     # Adicione as configurações adicionais do serviço back aqui
@@ -11,7 +11,7 @@ services:
   frontend:
     image: limanascimento/supertodolist:v1.1
     ports:
-      - 5173
+      - 15.228.240.218:5173
     # Adicione as configurações adicionais do serviço front aqui
 
 # Adicione outros serviços ou configurações adicionais do Docker Compose aqui
