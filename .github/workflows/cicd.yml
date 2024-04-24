@@ -33,7 +33,6 @@ jobs:
           tags: raf4costa/front-todo:latest
 
   deploy:
-    uses: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
