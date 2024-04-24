@@ -20,7 +20,7 @@ jobs:
       - name:  Build and push back Docker image
         uses: docker/build-push-action@v3.2.0
         with:
-          context: ./back
+          context: /Users/rcosta/Documents/GCM/Project_Devops_1/back
           push: true
           tags: |
               raf4costa/back-todo:v1.0
@@ -28,7 +28,7 @@ jobs:
       - name:  Build and push front Docker images
         uses: docker/build-push-action@v3.2.0
         with:
-          context: ./front
+          context: /Users/rcosta/Documents/GCM/Project_Devops_1/front
           push: true
           tags: |
             raf4costa/front-todo:v1.0
