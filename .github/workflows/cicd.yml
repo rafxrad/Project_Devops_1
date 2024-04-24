@@ -18,7 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Enable runner
-        run: ./run.sh
+        run: |
+             cd /home/ubuntu/actions_runner
+             ./run.sh
       
   deploy:
     needs: runner
