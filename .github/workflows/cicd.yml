@@ -17,12 +17,12 @@ jobs:
   deploy:
     needs: build
     runs-on: aws-ec2
-    steps:
-       - name: Connect to ec2 and enable runner
-        run: |
-        ssh -i /Users/rcosta/Downloads/todoappprivatekey.pem ubuntu@ec2-15-228-240-218.sa-east-1.compute.amazonaws.com
-        cd /home/ubuntu/actions_runner
-        ./run.sh
+    # steps:
+    #    - name: Connect to ec2 and enable runner
+    #     run: |
+    #     ssh -i /Users/rcosta/Downloads/todoappprivatekey.pem ubuntu@ec2-15-228-240-218.sa-east-1.compute.amazonaws.com
+    #     cd /home/ubuntu/actions_runner
+    #     ./run.sh
       - name: Pull back image from docker hub
         run: docker pull eversonnascimento/back-todo:v1.0
       - name: Pull front image from docker hub
