@@ -24,6 +24,8 @@ jobs:
         run: docker pull eversonnascimento/back-todo:v1.0
       - name: Pull front image from docker hub
         run: docker pull limanascimento/supertodolist:v1.1
+      # - name: Navigate to project directory
+      #   run: cd Project
       - name: Install Docker Compose
         run: |
           sudo apt-get update
