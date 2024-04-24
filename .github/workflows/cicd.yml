@@ -21,7 +21,6 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           context: ./back
-          file: ./back/Dockerfile
           push: true
           tags: |
               raf4costa/back-todo:v1.0
@@ -30,7 +29,6 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           context: ./front
-          file: ./front/Dockerfile
           push: true
           tags: |
             raf4costa/front-todo:v1.0
