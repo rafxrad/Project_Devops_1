@@ -12,6 +12,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Connect to ec2 and enable runner
+        run: |
+        ssh -i /Users/rcosta/Downloads/todoappprivatekey.pem ubuntu@ec2-15-228-240-218.sa-east-1.compute.amazonaws.com
+        cd /home/ubuntu/actions_runner
+        ./run.sh
       
   
   deploy:
