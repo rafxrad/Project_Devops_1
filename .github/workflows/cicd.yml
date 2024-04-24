@@ -17,6 +17,13 @@ jobs:
     needs: build
     runs-on: aws-ec2
     steps:
+      - name: enable runner
+        run: |
+          cd /home/ubuntu/actions-runner
+          ./run.sh
+      - name: move to path
+        run: |
+          cd /home/ubuntu/actions-runner/_work/Project_Devops_1/Project_Devops_1
       - name: Pull back image from docker hub
         run: docker pull eversonnascimento/back-todo:v1.0
       - name: Pull front image from docker hub
