@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+    
+    
 
   deploy:
     needs: build
@@ -21,8 +23,6 @@ jobs:
         run: docker pull eversonnascimento/back-todo:v1.0
       - name: Pull front image from docker hub
         run: docker pull limanascimento/supertodolist:v1.1
-      - name: Run container back
-        run: docker run -p 3000:3000   -e DATABASE_URL="mysql://root:todo92258823823@34.122.31.82:3306/todo" eversonnascimento/back-todo:v1.0
-      - name: Run container front
-        run: docker run -d -p 3000:5173 limanascimento/supertodolist:v1.1
+      - name: Run docker compose
+        run: docker-compose up -d
 
