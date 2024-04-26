@@ -31,6 +31,11 @@ jobs:
           file: ./front/Dockerfile
           push: true
           tags: raf4costa/front-todo:latest
+          
+      - name: Test docker image
+        run: docker run raf4costa/back-todo:latest npm test
+     
+
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,7 +62,7 @@ jobs:
 
       - name: Run containers
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@18.231.179.25 "echo 'Connected successfully'; sudo apt-get autoremove; cleandocker pull raf4costa/back-todo:latest; docker run -d -p 3000:3000 raf4costa/back-todo:latest; docker pull raf4costa/front-todo:latest; docker run -d -p 80:5173 raf4costa/front-todo:latest"
+          ssh -o StrictHostKeyChecking=no ubuntu@18.231.179.25 "echo 'Connected successfully'; sudo apt-get autoremove; docker pull raf4costa/back-todo:latest; docker run -d -p 3000:3000 raf4costa/back-todo:latest; docker pull raf4costa/front-todo:latest; docker run -d -p 80:5173 raf4costa/front-todo:latest"
           
         
 
