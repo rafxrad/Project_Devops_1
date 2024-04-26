@@ -15,14 +15,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
-      - name:  Build and push back Docker image
-        uses: docker/build-push-action@v3
-        with:
-          context: ./back
-          file: ./back/Dockerfile
-          push: true
-          tags: raf4costa/back-todo:latest
           
       - name:  Build and push front Docker images
         uses: docker/build-push-action@v3.2.0
@@ -62,7 +54,7 @@ jobs:
 
       - name: Run containers
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@18.231.179.25; "echo 'Connected successfully'; docker pull raf4costa/back-todo:latest; docker run -d -p 3000:3000 raf4costa/back-todo:latest; docker pull raf4costa/front-todo:latest; docker run -d -p 80:5173 raf4costa/front-todo:latest"
+          ssh -o StrictHostKeyChecking=no ubuntu@18.231.179.25; "echo 'Connected successfully'; docker pull raf4costa/front-todo:latest; docker run -d -p 80:5173 raf4costa/front-todo:latest"
           
         
 
